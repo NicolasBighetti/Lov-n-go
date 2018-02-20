@@ -28,7 +28,6 @@ const app = {
   // Bind any cordova events here. Common events are:
   // 'pause', 'resume', etc.
   onDeviceReady: function () {
-    this.receivedEvent('deviceready');/*
     document.getElementById('photo').addEventListener('click', this.deviceFound, false);
     alert(`Welcome on Lov'n'Go ! Start looking for people ?`);
     ble.isEnabled(
@@ -36,32 +35,19 @@ const app = {
       () => { ble.enable(() => { console.log('SUCCESS: ble activate by user'); } , () => { console.log('FAILURE: ble activate by user'); }) }
     );
     ble.scan([], 60, (device) => {
-      alert(`DEVICE FOUND: ${device}`);
+      alert(`DEVICE FOUND: ${JSON.stringify(device)}`);
       this.deviceFound(device);
     }, () => { console.log('FAILURE: ble scan'); });
-    */
   },
 
-  // Update DOM on a Received Event
-  receivedEvent: function (id) {
-    const parentElement = document.getElementById(id);
-    const listeningElement = parentElement.querySelector('.listening');
-    const receivedElement = parentElement.querySelector('.received');
-
-    listeningElement.setAttribute('style', 'display:none;');
-    receivedElement.setAttribute('style', 'display:block;');
-
-    console.log('Received Event: ' + id);
-  },
-
-  /*
   deviceFound: function(device) {
-    navigator.vibrate([500, 1000, 500, 1000, 500]);
+    const parentThis = this;
+    navigator.vibrate([500, 250, 500, 250, 500]);
     if (confirm('A lovely user found near you, take a picture with him/her ;) ?')) {
       navigator.camera.getPicture(
         (picture) => { 
           console.log('SUCCESS: take pic');
-          this.sendLoveToServer(this.getPosition, picture);
+          parentThis.sendLoveToServer(parentThis.getPosition, picture);
         },
         () => { console.log('FAILURE: take pic') });    
     }
@@ -89,7 +75,6 @@ const app = {
     alert('LOVE SENT TO SERVER');
     // TODO
   }
-  */
 
 };
 
